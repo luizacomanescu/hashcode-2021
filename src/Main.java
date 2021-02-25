@@ -1,6 +1,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -22,7 +26,7 @@ public class Main {
         ArrayList<Street> streets = new ArrayList<>();
         ArrayList<Path> paths = new ArrayList<>();
         try {
-            File myObj = new File("files/a.txt");
+            File myObj = new File("files/f.txt");
             Scanner myReader = new Scanner(myObj);
 
             data = myReader.nextLine();
@@ -68,15 +72,42 @@ public class Main {
             e.printStackTrace();
         }
 
-        for (int i=0;i<simulationDuration;i++){
-            System.out.println(i);
-            for (Path path:paths) {
-                if (!path.getStreetNames().isEmpty()) {
-                    System.out.println(path.streetNames.remove(0));
+        try {
+            HashMap<String, Integer> streetTime;
+            ArrayList<HashMap<String,Integer>> listIntersections = new ArrayList<>();
+            FileWriter myWriter = new FileWriter("output/out_f.txt");
+            for (int i=0;i<simulationDuration;i++){
+                streetTime = new HashMap<>();
+                for (Path path:paths) {
+                    if (!path.getStreetNames().isEmpty()) {
+                        streetTime.put(path.streetNames.remove(0), 1);
+                    }
                 }
-
+                if(!streetTime.isEmpty()){
+                    listIntersections.add(streetTime);
+                }
             }
 
+            myWriter.write(String.valueOf(listIntersections.size()));
+            myWriter.write(" \n");
+            int i = 1;
+            for (HashMap<String, Integer> map:listIntersections) {
+                myWriter.write(String.valueOf(i ++));
+                myWriter.write(" \n");
+                myWriter.write(String.valueOf(map.size()));
+                myWriter.write(" \n");
+                for (Map.Entry<String,Integer> entry : map.entrySet()) {
+                    myWriter.write(entry.getKey() + " " + entry.getValue());
+                    myWriter.write(" \n");
+                }
+            }
+
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
+
     }
 }
