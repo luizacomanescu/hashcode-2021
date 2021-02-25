@@ -11,6 +11,11 @@ public class Main {
     static int noCars;
     static int bonusPoints;
 
+    /**
+     * FUCLK OFF
+     * @param args
+     */
+
     public static void main(String args[]) {
         String data;
         String[] values;
