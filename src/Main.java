@@ -22,7 +22,7 @@ public class Main {
         ArrayList<Street> streets = new ArrayList<>();
         ArrayList<Path> paths = new ArrayList<>();
         try {
-            File myObj = new File("/Users/luizacomanescu/git/hashcode_2021/a.txt");
+            File myObj = new File("files/a.txt");
             Scanner myReader = new Scanner(myObj);
 
             data = myReader.nextLine();
