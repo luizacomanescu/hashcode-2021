@@ -67,5 +67,16 @@ public class Main {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+
+        for (int i=0;i<simulationDuration;i++){
+            System.out.println(i);
+            for (Path path:paths) {
+                if (!path.getStreetNames().isEmpty()) {
+                    System.out.println(path.streetNames.remove(0));
+                }
+
+            }
+
+        }
     }
 }
